@@ -110,9 +110,41 @@ function popup_panels_field( $post_id, $key, $label, $type = 'text', $placeholde
 	echo '</label></p>';
 }
 
+function popup_panels_select_field( $post_id, $key, $label, array $options, $help_text = '' ) {
+	$value = get_post_meta( $post_id, $key, true );
+	if ( ! in_array( $value, array_keys( $options ), true ) ) {
+		$value = array_key_first( $options );
+	}
+
+	echo '<p><label><strong>' . esc_html( $label ) . '</strong><br>';
+	echo '<select name="' . esc_attr( $key ) . '" style="width:100%">';
+
+	foreach ( $options as $option_value => $option_label ) {
+		echo '<option value="' . esc_attr( $option_value ) . '"' . selected( $value, $option_value, false ) . '>' . esc_html( $option_label ) . '</option>';
+	}
+
+	echo '</select>';
+
+	if ( $help_text ) {
+		echo '<br><span class="description">' . esc_html( $help_text ) . '</span>';
+	}
+
+	echo '</label></p>';
+}
+
 function popup_panels_metabox( $post ) {
 	wp_nonce_field( 'popup_panels_save', 'popup_panels_nonce' );
 	popup_panels_field( $post->ID, '_popup_panel_target', __( 'Popup target', 'popup-panels' ), 'text', 'instructions, size-guide, warranty' );
+	popup_panels_select_field(
+		$post->ID,
+		'_popup_panel_layout',
+		__( 'Popup layout', 'popup-panels' ),
+		[
+			'drawer' => __( 'Drawer', 'popup-panels' ),
+			'modal'  => __( 'Classic popup', 'popup-panels' ),
+		],
+		__( 'Drawer slides in from the right. Classic popup appears centered.', 'popup-panels' )
+	);
 	$target = popup_panels_target( $post->ID );
 	echo '<p style="padding:10px 12px;background:#f6f7f7;border-left:4px solid #2271b1;">';
 	echo '<strong>' . esc_html__( 'Link trigger:', 'popup-panels' ) . '</strong><br>';
@@ -137,6 +169,14 @@ function popup_panels_save_post( $post_id ) {
 	if ( isset( $_POST['_popup_panel_target'] ) ) {
 		update_post_meta( $post_id, '_popup_panel_target', sanitize_title( wp_unslash( $_POST['_popup_panel_target'] ) ) );
 	}
+
+	if ( isset( $_POST['_popup_panel_layout'] ) ) {
+		$layout = sanitize_key( wp_unslash( $_POST['_popup_panel_layout'] ) );
+		if ( ! in_array( $layout, [ 'drawer', 'modal' ], true ) ) {
+			$layout = 'drawer';
+		}
+		update_post_meta( $post_id, '_popup_panel_layout', $layout );
+	}
 }
 
 function popup_panels_render_custom_popups() {
@@ -156,12 +196,14 @@ function popup_panels_render_custom_popups() {
 
 	foreach ( $panels as $panel_post ) {
 		$target = popup_panels_target( $panel_post->ID );
+		$layout = get_post_meta( $panel_post->ID, '_popup_panel_layout', true );
+		$layout = in_array( $layout, [ 'drawer', 'modal' ], true ) ? $layout : 'drawer';
 
 		if ( ! $target ) {
 			continue;
 		}
 		?>
-		<div class="popup-panel" data-popup-panel="<?php echo esc_attr( $target ); ?>" aria-hidden="true">
+		<div class="popup-panel popup-panel--<?php echo esc_attr( $layout ); ?>" data-popup-panel="<?php echo esc_attr( $target ); ?>" aria-hidden="true">
 			<div class="popup-panel__backdrop" data-popup-close></div>
 			<aside class="popup-panel__panel" role="dialog" aria-modal="true" aria-label="<?php echo esc_attr( get_the_title( $panel_post ) ); ?>">
 				<button class="popup-panel__close" type="button" data-popup-close aria-label="<?php echo esc_attr__( 'Close', 'popup-panels' ); ?>">&times;</button>
