@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Popup Panels 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-24 00:00-0300\n"
+"PO-Revision-Date: 2026-08-24 00:00-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: scripts/generate-plugin-translations.py\n"
+
+#: popup-panels/popup-panels.php:66
+msgid "Add New Popup panel"
+msgstr ""
+
+#: popup-panels/popup-panels.php
+msgid "Adds popup panel content types and shared open and close behavior for the theme."
+msgstr ""
+
+#: popup-panels/popup-panels.php:144
+msgid "Classic popup"
+msgstr ""
+
+#: popup-panels/popup-panels.php:209
+msgid "Close"
+msgstr ""
+
+#: popup-panels/popup-panels.php:143
+msgid "Drawer"
+msgstr ""
+
+#: popup-panels/popup-panels.php:146
+msgid "Drawer slides in from the right. Classic popup appears centered."
+msgstr ""
+
+#: popup-panels/popup-panels.php:67
+msgid "Edit Popup panel"
+msgstr ""
+
+#: popup-panels/popup-panels.php:150
+msgid "Link trigger:"
+msgstr ""
+
+#: popup-panels/popup-panels.php:68
+msgid "New Popup panel"
+msgstr ""
+
+#: popup-panels/popup-panels.php:224
+msgid "Open information"
+msgstr ""
+
+#: popup-panels/popup-panels.php:141
+msgid "Popup layout"
+msgstr ""
+
+#: popup-panels/popup-panels.php:65
+msgid "Popup panel"
+msgstr ""
+
+#: popup-panels/popup-panels.php
+msgid "Popup Panels"
+msgstr ""
+
+#: popup-panels/popup-panels.php:64 popup-panels/popup-panels.php:70
+msgid "Popup panels"
+msgstr ""
+
+#: popup-panels/popup-panels.php:84
+msgid "Popup settings"
+msgstr ""
+
+#: popup-panels/popup-panels.php:137
+msgid "Popup target"
+msgstr ""
+
+#: popup-panels/popup-panels.php:152
+msgid "Use this shortcode in a product description, page, or post. Header icons can also use this target with action Show."
+msgstr ""
+
+#: popup-panels/popup-panels.php:69
+msgid "View Popup panel"
+msgstr ""
