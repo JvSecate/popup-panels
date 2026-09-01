@@ -1,0 +1,111 @@
+/* Popup panels are rendered in the footer and stay inert until opened. */
+.popup-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.popup-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-panel__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 14, 12, 0.48);
+}
+
+.popup-panel__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(560px, 94vw);
+  height: 100vh;
+  max-height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 18px;
+  padding: 34px 30px 28px;
+  overflow: auto;
+  background: var(--bg-1);
+  color: var(--text);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.18);
+  transform: translateX(100%);
+  transition: transform 220ms ease;
+}
+
+.popup-panel.is-open .popup-panel__panel {
+  transform: translateX(0);
+}
+
+.popup-panel--modal {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.popup-panel--modal .popup-panel__panel {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: min(760px, 94vw);
+  max-height: min(84vh, 920px);
+  border-radius: 22px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
+  transform: translateY(18px) scale(0.98);
+}
+
+.popup-panel--modal.is-open .popup-panel__panel {
+  transform: translateY(0) scale(1);
+}
+
+.popup-panel--modal .popup-panel__backdrop {
+  background: rgba(18, 14, 12, 0.56);
+}
+
+.popup-panel__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.popup-panel h2 {
+  margin: 0;
+  padding-right: 42px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.popup-panel__content {
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.popup-panel__content p,
+.popup-panel__content ul,
+.popup-panel__content ol {
+  margin-top: 0;
+}
+
+.popup-panel-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid currentColor;
+  color: var(--accent-strong);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

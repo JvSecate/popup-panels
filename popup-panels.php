@@ -243,6 +243,13 @@ function popup_panel_link_shortcode( $atts ) {
 }
 
 function popup_panels_enqueue_assets() {
+	wp_enqueue_style(
+		'popup-panels',
+		POPUP_PANELS_URL . 'assets/popup-panels.css',
+		[],
+		popup_panels_asset_version( 'assets/popup-panels.css' )
+	);
+
 	wp_enqueue_script(
 		'popup-panels',
 		POPUP_PANELS_URL . 'assets/popup-panels.js',
